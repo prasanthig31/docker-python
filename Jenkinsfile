@@ -7,7 +7,7 @@ pipeline {
 
         stage('Build docker image') {
             steps {  
-                sh 'sudo docker build -t prasanthig/pythonapp:$BUILD_NUMBER .'
+                sh ' docker build -t prasanthig/pythonapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -17,13 +17,13 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh 'sudo docker push prasanthig/pythonapp:$BUILD_NUMBER'
+                sh 'docker push prasanthig/pythonapp:$BUILD_NUMBER'
             }
         }
 }
 post {
         always {
-            sh 'sudo docker logout'
+            sh 'docker logout'
         }
 success {
                 slackSend message: "Build deployed successfully - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
