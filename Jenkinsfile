@@ -7,7 +7,7 @@ pipeline {
 
         stage('Build docker image') {
             steps {  
-                sh ' docker build -t prasanthig/pythonapp:$BUILD_NUMBER .'
+                sh 'sudo docker build -t prasanthig/pythonapp:$BUILD_NUMBER .'
             }
         }
         stage('login to dockerhub') {
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('push image') {
             steps{
-                sh ' docker push prasanthig/pythonapp:$BUILD_NUMBER'
+                sh 'sudo docker push prasanthig/pythonapp:$BUILD_NUMBER'
             }
         }
 }
